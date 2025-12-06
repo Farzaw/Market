@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block menu2 %} menu-open {% endblock %}
+{% block active_menu2 %}active{% endblock %}
+{% block active_menu2_1 %}active{% endblock %}
+
+{% block content %}
+    {% csrf_token %}
+    <div class="card card-primary card-outline">
+         <form method="POST" enctype="multipart/form-data">
+            <div class="m-2">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <input type="submit" value="Изменить">
+            </div>
+         </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block menu2 %} menu-open {% endblock %}
+{% block active_menu2 %}active{% endblock %}
+{% block active_menu2_3 %}active{% endblock %}
+
+{% block content %}
+
+<div class="card card-primary card-outline">
+    {% for branches in object_list %}
+    <div class="card-body">
+        <p>{{ branches.name }}</p>
+        <table class="table table-bordered table-hover" style="font-size: 90%">
+            <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Штрих код</th>
+                <th>Цена</th>
+                <th>Выручка</th>
+                <th>без скидки</th>
+                <th>Скидка</th>
+                <th>со скидкой</th>
+                <th>Поступило</th>
+                <th>На складе</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for object in branches.product.all %}
+            <tr>
+                <td>{{ object.name }}</td>
+                <td>{{ object.barcode }}</td>
+                <td>{{ object.cost_price }}</td>
+                <td>{{ object.income_percent }}%</td>
+                <td>{{ object.price_without_discount }}</td>
+                <td>{{ object.discount }}%</td>
+                <td>{{ object.price }}</td>
+                <td>{{ object.received }}</td>
+                <td>{{ object.in_stock }}</td>
+                <td align="right">
+                    <a href="{% url 'product:product_update' object.id %}"> <i class="fa fa-edit"></i></a> &nbsp;
+                    <a href="{% url 'product:product_delete' object.id %}" class="confirm-delete">
+                        <i class="fa fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

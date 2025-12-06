@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block menu2 %} menu-open {% endblock %}
+{% block active_menu2 %}active{% endblock %}
+{% block active_menu2_1 %}active{% endblock %}
+
+{% block content %}
+    <h1>Delete FILIAL</h1>
+    <form action="" method="post">{% csrf_token %}
+        <p>Вы точно хотите удалить филиал по адресу {{ object.address }}</p>
+        <p>Вы безвозратно потеряете:</p>
+        <p>Аккаунт: {{ object.owner }}</p>
+        {% if object.product.exists %}
+            <p>Продукты: {% for i in object.product.all %} {{ i.name }} {% endfor %}</p>
+        {% endif %}
+        {% if object.employee.exists %}
+            <p>Сотрудники: {% for i in object.employee.all %} {{ i.first_name }} {{ i.last_name }} {% endfor %}</p>
+        {% endif %}
+        <input type="submit" value="Удалить" />
+    </form>
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block menu2 %} menu-open {% endblock %}
+{% block active_menu2 %}active{% endblock %}
+{% block active_menu2_1 %}active{% endblock %}
+
+{% block content %}
+    <div class="card card-primary card-outline">
+         <form method="POST" enctype="multipart/form-data">
+             {% csrf_token %}
+             <div class="m-2">
+                 {% bootstrap_field form.first_name %}
+                 {% bootstrap_field form.last_name %}
+                 {% bootstrap_field form.position_id %}
+                 {% bootstrap_field form.address %}
+                 {% bootstrap_field form.phone %}
+                 {% bootstrap_field form.salary %}
+                 {% bootstrap_field form.currency %}
+                 <input type="button" onclick="return openHiddenFields(this);" value="Добавить логин и пароль">
+                 <div id="hidden_fields" style="display:none;">
+                    {% bootstrap_field form.email %}
+                    {% bootstrap_field form.password %}
+                    {% bootstrap_field form.password_confirm %}
+                </div>
+                 
+                 <input type="submit" value="Создать">
+             </div>
+         </form>
+    </div>
+
+    <script>
+        let has_error = document.getElementsByClassName('is-invalid')[0];
+                
+        if(typeof has_error !== "undefined"){
+            hidden_fields.style.display = ''
+        }
+    </script>
+
+    <script> function openHiddenFields(Element) {
+        let hidden_fields = document.getElementById('hidden_fields');
+
+         if (hidden_fields.style.display === 'none'){
+            hidden_fields.style.display = ''
+            return false
+        } else {
+            hidden_fields.style.display = 'none'
+            return false;
+        }
+    }
+     </script>
+{% endblock %}

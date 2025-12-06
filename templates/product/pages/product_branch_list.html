@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block menu2 %} menu-open {% endblock %}
+{% block active_menu2 %}active{% endblock %}
+{% block active_menu2_1 %}active{% endblock %}
+
+{% block content %}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <a href="{% url 'product:product_create' branch_id %}" class="btn btn-block btn-success"
+           style="width: 100px;">Добавить </a>
+            <form method="get">
+                <a href="{% url 'product:product_branch_list' branch_id %}?provider=">
+                    <div class="btn btn-success">--------------</div>
+                </a>
+                {% for i in providers %}
+                <a href="{% url 'product:product_branch_list' branch_id %}?provider={{ i.id }}">
+                    <div class="btn btn-success">{{ i.name }}</div>
+                </a>
+                {% endfor %}
+            </form>
+    </div>
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover" style="font-size: 90%">
+            <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Штрих код</th>
+                <th>Себестоимость</th>
+                <th>Выручка</th>
+                <th>Цена</th>
+                <th>Скидка</th>
+                <th>Со скидкой</th>
+                <th>Кол.</th>
+                <th>Дата</th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <form method="get">
+                    <td> {{ f.form.name|add_class:"form-control" }}</td>
+                    <td> {{ f.form.barcode|add_class:"form-control" }}</td>
+                    <td> {{ f.form.phone|add_class:"form-control" }}</td>
+                    <td> {{ f.form.position_id|add_class:"form-control p-lg-0" }} </td>
+                    <td> {{ f.form.none|add_class:"form-control p-lg-0" }}</td>
+                    <td> {{ f.form.none|add_class:"form-control p-lg-0" }}</td>
+                    <td> {{ f.form.none|add_class:"form-control p-lg-0" }}</td>
+                    <td> {{ f.form.none|add_class:"form-control p-lg-0" }}</td>
+                    <td> {{ f.form.update_date_quantity_gte.label }}
+                        {{ f.form.update_date_quantity_gte|add_class:"form-control" }}
+                        {{ f.form.update_date_quantity_lte.label }}
+                        {{ f.form.update_date_quantity_lte|add_class:"form-control" }}</td>
+                    <td align="center">
+                        <button class="btn btn-success" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </td>
+                </form>
+            </tr>
+            {% for product in object_list %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.barcode }}</td>
+                <td>{{ product.cost_price }}</td>
+                <td>{{ product.income_percent }}%</td>
+                <td>{{ product.price_without_discount }}</td>
+                <td>{{ product.discount }}%</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.number_packages }}</td>
+                <td>{{ product.update_date_quantity }}</td>
+                <td align="right">
+                    <a href="{% url 'product:product_update' product.id %}"> <i class="fa fa-edit"></i></a> &nbsp;
+                    <a href="{% url 'product:product_delete' product.id %}" class="confirm-delete">
+                        <i class="fa fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{{ sum_cost_price }}</td>
+                <td>{{ sum_profit }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-header">
+        {% include 'include/pagination.html' %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block menu2 %} menu-open {% endblock %}
+{% block active_menu2 %}active{% endblock %}
+{% block active_menu2_1 %}active{% endblock %}
+
+{% block content %}
+    <div class="card card-primary card-outline">
+        <h1>Delete Employee</h1>
+        <p>Вы точно хотите удалить сотрудника {{ object.last_name }} {{ object.first_name }}</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Удалить" />
+        </form>
+    </div>
+{% endblock %}

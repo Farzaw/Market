@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block active_branch_3 %} active{% endblock %}
+{% block menu2 %} menu-open {% endblock %}
+{% block active_menu2 %}active{% endblock %}
+{% block active_menu2_1 %}active{% endblock %}
+
+{% block content %}
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+
+                <h3 class="profile-username text-center">{{ object.name }}</h3>
+
+                <p class="text-muted text-center">{{ object.phone }}</p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Владелец</b> <a class="float-right">{{ object.owner }}</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Сотрудников</b> <a class="float-right">{{ object.employee.count }}</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Товаров</b> <a class="float-right">{{ object.product.count }}</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- About Me Box -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">О филиале</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+                <p class="text-muted">{{ object.country }}, {{ object.city }}, {{ object.address }}</p>
+<!--                  <hr>-->
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link active" href="#info" data-toggle="tab">Информация</a></li>
+                </ul>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+                    <div class="active tab-pane" id="info">
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-4">
+                                <a href="{% url 'account:branch_employee_list' object.id %}">
+                                    <div class="info-box">
+                                  <span class="info-box-icon bg-info elevation-1"><i class="fas fa-clipboard-list"></i></span>
+
+                                  <div class="info-box-content">
+                                      <span class="info-box-text">Сотрудников</span>
+                                      <span class="info-box-number"> {{ object.employee.count }} </span>
+                                  </div>
+                              </div>
+                                </a>
+                              <!-- /.info-box -->
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4">
+                                <a href="{% url 'product:product_branch_list' object.id %}">
+                                    <div class="info-box mb-3">
+                                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user-alt"></i></span>
+
+                                  <div class="info-box-content">
+                                      <span class="info-box-text">Товаров</span>
+                                      <span class="info-box-number">{{ object.product.count }}</span>
+                                  </div>
+                                  <!-- /.info-box-content -->
+                              </div>
+                                </a>
+                              <!-- /.info-box -->
+                            </div>
+                            <div class="clearfix hidden-md-up"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-4">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-bus"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Доход</span>
+                                    <span class="info-box-number">{{ income }}</span>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-12 col-sm-8 col-md-4">
+                            <div class="info-box mb-3">
+                            <span class="info-box-icon bg-success elevation-2"><i class="fas fa-user"></i></span>
+
+                            <div class="info-box-content">
+                              <span class="info-box-text">Продано товаров</span>
+                              <span class="info-box-number">{{ product_count }}</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+    </section>
+    <div class="card card-primary card-outline"></div>
+{% endblock %}

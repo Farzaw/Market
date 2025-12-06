@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block bmenu3 %}menu-open{% endblock %}
+{% block active_bmenu3 %}active{% endblock %}
+{% block active_bmenu3_1 %} active {% endblock %}
+
+{% block menu5 %}menu-open{% endblock %}
+{% block active_menu5 %}active{% endblock %}
+{% block active_menu5_1 %}active{% endblock %}
+
+{% block content %}
+    <h1>Delete FILIAL</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Вы точно удалить {{ object.worker }}</p>
+        <input type="submit" value="Удалить" />
+    </form>
+{% endblock content %}

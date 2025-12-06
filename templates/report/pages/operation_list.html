@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block bmenu3 %}menu-open{% endblock %}
+{% block active_bmenu3 %}active{% endblock %}
+{% block active_bmenu3_2 %} active {% endblock %}
+
+{% block menu4 %}menu-open{% endblock %}
+{% block active_menu4 %}active{% endblock %}
+{% block active_menu4_2 %}active{% endblock %}
+
+{% block content %}
+<div class="card card-primary card-outline">
+    <div class="card-body">
+        <table class="table table-bordered table-hover" style="font-size: 90%">
+            <thead>
+            <tr>
+                <th>Номер</th>
+                <th>Продавец</th>
+                <th>Сумма продажи</th>
+                <th>Прибыль</th>
+                <th>Дата выдачи</th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <form method="get">
+                    <td>{{ f.form.id|add_class:"form-control" }} </td>
+                    <td>{{ f.form.seller|add_class:"form-control" }}</td>
+                    <td> </td>
+                    <td> </td>
+                    <td> {{ f.form.date_issue_gte.label }} {{ f.form.date_issue_gte|add_class:"form-control" }}
+                        {{ f.form.date_issue_lte.label }}{{ f.form.date_issue_lte|add_class:"form-control" }} </td>
+                    <td align="center">
+                        <button class="btn btn-success" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </td>
+                </form>
+            </tr>
+            {% for cheque in object_list %}
+            <tr>
+                <td>{{ cheque.id }} </td>
+                <td>{{ cheque.seller.last_name }} {{ cheque.seller.first_name }}</td>
+                <td>{{ cheque.sum_product }}</td>
+                <td>{{ cheque.net_profit }}</td>
+                <td>{{ cheque.date_issue }}</td>
+                <td align="center"></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{{ sale_amount }}</td>
+                <td>{{ profit_amount }}</td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-header">
+        {% include 'include/pagination.html' %}
+    </div>
+</div>
+{% endblock %}

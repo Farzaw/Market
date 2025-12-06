@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block menu2 %} menu-open {% endblock %}
+{% block active_menu2 %}active{% endblock %}
+{% block active_menu2_1 %}active{% endblock %}
+
+{% block content %}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <a href="{% url 'account:employee_create' branch_id %}"
+           class="btn btn-block btn-success" style="width: 100px;">Добавить </a>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover" style="font-size: 90%">
+            <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Email</th>
+                <th>Телефон</th>
+                <th>Должность</th>
+                <th>Зарплата</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <form method="get">
+                    <td> {{ form.form.first_name|add_class:"form-control" }}</td>
+                    <td> {{ form.form.email|add_class:"form-control" }}</td>
+                    <td> {{ form.form.phone|add_class:"form-control" }}</td>
+                    <td> {{ form.form.position_id|add_class:"form-control p-lg-0" }} </td>
+                    <td> {{ form.control_status|add_class:"form-control p-lg-0" }}</td>
+                    <td align="center">
+                        <button class="btn btn-success" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </td>
+                </form>
+            </tr>
+
+            {% for object in object_list %}
+            <tr>
+                <td>{{ object.last_name }} {{ object.first_name }}</td>
+                <td>{{ object.user.email }}</td>
+                <td>{{ object.phone }}</td>
+                <td>{{ object.position_id.name }}</td>
+                <td>{{ object.salary }} {{ object.currency }}</td>
+                <td align="center">
+                    <a href="#"><i class="fa fa-eye"></i></a>&nbsp;
+                    <a href="{% url 'account:employee_update' object.id %}"><i class="fa fa-edit"></i></a>&nbsp;
+                    <a class="confirm-delete" href="{% url 'account:employee_delete' object.id %}">
+                        <i class="fa fa-trash-alt"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="card-header">
+        {% include 'include/pagination.html' %}
+    </div>
+</div>
+{% endblock %}

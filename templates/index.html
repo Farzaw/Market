@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block active_main_page_shop %} active {% endblock %}
+{% block active_main_page_branch %} active {% endblock %}
+{% block menu1 %} menu-open {% endblock %}
+
+{% block content %}
+    {% if user.is_shop_admin %}
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box">
+                  <span class="info-box-icon bg-info elevation-1"><i class="fas fa-clipboard-list"></i></span>
+
+                  <div class="info-box-content">
+                      <span class="info-box-text">Филиалов</span>
+                      <span class="info-box-number">{{ user.shop.branch_office.count }}</span>
+                  </div>
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <div class="col-12 col-sm-8 col-md-4">
+              <div class="info-box mb-3">
+                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user-alt"></i></span>
+
+                  <div class="info-box-content">
+                      <span class="info-box-text">Сотрудников</span>
+                      <span class="info-box-number">{{ user.shop.employees.count }}</span>
+                  </div>
+                  <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <div class="clearfix hidden-md-up"></div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-bus"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Доход</span>
+                        <span class="info-box-number">{{ income }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-8 col-md-4">
+                <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-2"><i class="fas fa-user"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Продано товаров</span>
+                  <span class="info-box-number">{{ product_count }}</span>
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+            </div>
+        </div>
+    {% elif user.is_branch_admin %}
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box">
+                  <span class="info-box-icon bg-info elevation-1"><i class="fas fa-clipboard-list"></i></span>
+
+                  <div class="info-box-content">
+                      <span class="info-box-text">Продано товаров</span>
+                      <span class="info-box-number"> {{ product_count }} </span>
+                  </div>
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <div class="col-12 col-sm-8 col-md-4">
+              <div class="info-box mb-3">
+                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user-alt"></i></span>
+
+                  <div class="info-box-content">
+                      <span class="info-box-text">Доход</span>
+                      <span class="info-box-number">{{ income }}</span>
+                  </div>
+                  <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+
+            <div class="clearfix hidden-md-up"></div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-bus"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Продано товаров</span>
+                        <span class="info-box-number">300</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}

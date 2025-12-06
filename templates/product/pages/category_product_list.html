@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block menu3 %} menu-open {% endblock %}
+{% block active_menu3 %}active{% endblock %}
+{% block active_menu3_2 %}active{% endblock %}
+
+{% block content %}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <a href="{% url 'product:category_product_create' %}">
+            <button type="button" class="btn btn-success">Добавить</button>
+        </a>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover" style="font-size: 90%">
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for object in object_list %}
+                <tr>
+                    <td>{{ object.name }}</td>
+                    <td align="center">
+                        <a href="#"><i class="fa fa-edit"></i></a>&nbsp;
+                        <a class="confirm-delete" href="{% url 'product:category_product_delete' object.id %}">
+                            <i class="fa fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

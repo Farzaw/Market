@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block bmenu3 %}menu-open{% endblock %}
+{% block active_bmenu3 %}active{% endblock %}
+{% block active_bmenu3_1 %} active {% endblock %}
+
+{% block menu5 %}menu-open{% endblock %}
+{% block active_menu5 %}active{% endblock %}
+{% block active_menu5_1 %}active{% endblock %}
+
+{% block content %}
+    <div class="card card-primary card-outline">
+         <form method="POST" enctype="multipart/form-data">
+            <div class="m-2">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <input type="submit" value="Создать">
+            </div>
+         </form>
+    </div>
+{% endblock %}

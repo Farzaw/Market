@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block menu2 %} menu-open {% endblock %}
+{% block active_menu2 %}active{% endblock %}
+{% block active_menu2_2 %}active{% endblock %}
+
+{% block content %}
+
+<div class="card card-primary card-outline">
+    {% for branches in object_list %}
+    <div class="card-body">
+        <p>{{ branches.name }}</p>
+        <table class="table table-bordered table-hover" style="font-size: 90%">
+            <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Email</th>
+                <th>Телефон</th>
+                <th>Должность</th>
+                <th>Зарплата</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for object in branches.employee.all %}
+                <tr>
+                    <td>{{ object.last_name }} {{ object.first_name }}</td>
+                    <td>{{ object.user.email }}</td>
+                    <td>{{ object.phone }}</td>
+                    <td>{{ object.position_id.name }}</td>
+                    <td>{{ object.salary }} {{ object.currency }}</td>
+                    <td align="center">
+                        <a href="{% url 'account:employee_update' object.id %}"><i class="fa fa-edit"></i></a>&nbsp;
+                        <a class="confirm-delete" href="{% url 'account:employee_delete' object.pk %}">
+                            <i class="fa fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

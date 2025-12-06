@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}
+
+{% block menu3 %} menu-open {% endblock %}
+{% block active_menu3 %}active{% endblock %}
+{% block active_menu3_4 %}active{% endblock %}
+
+{% block content %}
+<div class="card card-primary card-outline">
+    <div class="card-body">
+        <table class="table table-bordered table-hover" style="font-size: 90%">
+            <thead>
+            <tr>
+                <th>Филиал</th>
+                <th>Товар</th>
+                <th>Кассир</th>
+                <th>Дата</th>
+                <th>Количество</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for object in object_list %}
+                <tr>
+                    <td>{{ object.branch_office.name }}</td>
+                    <td>{{ object.product.name }}</td>
+                    <td>{{ object.cashier.last_name }} {{ object.cashier.first_name }}</td>
+                    <td>{{ object.create_at }}</td>
+                    <td>{{ object.quantity }}</td>
+                    <td align="center">
+                        <a class="confirm-delete" href="{% url 'product:product_inquiry_list' object.id %}"><i class="fa fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

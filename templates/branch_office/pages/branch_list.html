@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}
+
+{% block menu2 %} menu-open {% endblock %}
+{% block active_menu2 %}active{% endblock %}
+{% block active_menu2_1 %}active{% endblock %}
+
+{% block content %}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <a href="{% url 'shop:branch_create' %}">
+            <button type="button" class="btn btn-success">Добавить</button>
+        </a>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover" style="font-size: 90%">
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th>Адрес</th>
+                <th>Телефон</th>
+                <th>Владелец</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for object in object_list %}
+                <tr>
+                    <td>{{ object.name }}</td>
+                    <td>{{ object.address }}</td>
+                    <td>{{ object.phone }}</td>
+                    <td>{{ object.owner.email }}</td>
+                    <td align="center">
+                        <a href="{% url 'shop:branch_detail' object.id %}"><i class="fa fa-eye"></i></a>&nbsp;
+                        <a href="{% url 'shop:branch_update' object.id %}"><i class="fa fa-edit"></i></a>&nbsp;
+                        <a class="confirm-delete" href="{% url 'shop:branch_delete' object.pk %}">
+                            <i class="fa fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

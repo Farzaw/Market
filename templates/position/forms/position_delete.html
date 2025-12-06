@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block menu3 %}menu-open{% endblock %}
+{% block active_menu3 %}active{% endblock %}
+{% block active_menu3_1 %}active{% endblock %}
+
+{% block content %}
+    <h1>Delete FILIAL</h1>
+    <form action="" method="post">{% csrf_token %}
+        <p>Вы точно хотите удалить филиал по адресу {{ object.name }}</p>
+        <input type="submit" value="Удалить" />
+    </form>
+{% endblock content %}

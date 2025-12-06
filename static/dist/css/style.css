@@ -1,0 +1,11 @@
+.eddel li {
+    display: inline-block;
+}
+
+.lasttd {
+    width: 80px;
+}
+
+label{
+    color: black;
+}
