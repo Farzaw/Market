@@ -15,5 +15,7 @@ CRM Market - Что это?
 Технологии:
 
 Backend: Django (Python)
+
 Frontend: JavaScript (92.5%), CSS
+
 Database: SQLite
